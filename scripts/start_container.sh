@@ -1,5 +1,5 @@
  #!/bin/bash
-set-e
+set -e
 
 # pull the docker image from Docker Hub
  docker pull kishan273/simple-python-flask-service
