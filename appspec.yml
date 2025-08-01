@@ -1,13 +1,14 @@
 version: 0.0
 os: linux
+files:
+  - source: /  # This copies all files from the root of your deployment artifact
+    destination: /var/www/html # Or wherever you want your application files to go
 
 hooks:
   ApplicationStop:
     - location: scripts/stop_container.sh
       timeout: 300
       runas: root
-
-
   AfterInstall:
     - location: scripts/start_container.sh
       timeout: 300
