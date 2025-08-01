@@ -1,9 +1,3 @@
- #!/bin/bash
-set -e
-
-# pull the docker image from Docker Hub
- docker pull kishan273/simple-python-flask-service
-
-
-#Run the Docker image as a container 
+#!/bin/bash
+docker pull kishan273/simple-python-flask-service
 docker run -d -p 5000:5000 kishan273/simple-python-flask-service
