@@ -22,18 +22,12 @@ phases:
       - echo "Building Docker Image"
       - docker build -t "$DOCKER_REG_URL/$DOCKER_REG_USERNAME/simple-python-flask-service:latest" .
       - docker push "$DOCKER_REG_URL/$DOCKER_REG_USERNAME/simple-python-flask-service:latest"
-      
-      # Create a deployment artifact (zip file)
-      - echo "Creating deployment package"
-      - zip -r deployment.zip . -x "*.git*" "*.dockerignore*" "*.env*"
-
-  post_build:
-    commands:
       - echo "Build completed successfully"
 
-# Add this artifacts section to upload to S3
 artifacts:
+  # Do not create a zip file yourself.
+  # Let CodeBuild package the files from the project root.
   files:
-    - deployment.zip
-  discard-paths: yes
-  base-directory: .
+    - '**/*' # This packages all files and folders in the project root
+  discard-paths: no
+  base-directory: . # This ensures appspec.yml is at the root of the final artifact.
